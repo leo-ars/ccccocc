@@ -1,0 +1,41 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ccccocc",
+	"main": "src/worker/index.ts",
+	"compatibility_date": "2026-04-12",
+	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"SANDBOX_TRANSPORT": "websocket",
+	},
+	"assets": {
+		"not_found_handling": "single-page-application",
+	},
+	"routes": [
+		{
+			"pattern": "code.devbin.tools",
+			"custom_domain": true,
+		},
+	],
+	"containers": [
+		{
+			"class_name": "Sandbox",
+			"image": "./container/Dockerfile",
+			"instance_type": "standard-2",
+			"max_instances": 5,
+		},
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "Sandbox",
+				"name": "Sandbox",
+			},
+		],
+	},
+	"migrations": [
+		{
+			"new_sqlite_classes": ["Sandbox"],
+			"tag": "v1",
+		},
+	],
+}
