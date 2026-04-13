@@ -8,7 +8,7 @@ Run through these scenarios after deploying or during local development.
 - [x] Connection state indicator shows green "Connected"
 - [x] Type `echo hello` and press Enter — output appears correctly
 - [x] Check browser console — no errors during initial connection
-- [ ] Banner lists bundled tools such as `claude`, `codex`, `vim`, and `emacs`
+- [ ] Banner lists bundled tools such as `claude`, `codex`, `opencode`, `gh`, `vim`, and `emacs`
 
 ## Control codes
 
@@ -138,6 +138,8 @@ Run through these scenarios after deploying or during local development.
 - [ ] Run `top` or `htop` — live-updating TUI renders properly
 - [ ] Run Claude Code (if installed) — interactive UI works
 - [ ] Run Codex CLI (if installed) — interactive UI works
+- [ ] Run OpenCode CLI (if installed) — interactive UI works
+- [ ] Run `gh --version` — GitHub CLI is available
 - [ ] Arrow keys, Ctrl+C, Ctrl+D behave correctly in all tools
 
 ## Auth — dev mode (no Access configured)

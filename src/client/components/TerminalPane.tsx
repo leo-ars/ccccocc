@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { GhosttyTerminalAdapter } from "../terminal/adapter";
 import { TerminalSocket } from "../terminal/socket";
 import type { SocketState } from "../terminal/socket";
+import { BrowserOpenHandler } from "../terminal/browser-open";
 
 interface TerminalPaneProps {
   /** Workspace name — the server derives the actual sandbox ID from user identity + workspace. */
@@ -47,6 +48,9 @@ export function TerminalPane({ workspace, sessionId, onStateChange }: TerminalPa
     });
     terminal.mount(container);
 
+    // ---- browser open handler (detects [[BROWSER_OPEN:url]] markers) ----
+    const browserOpenHandler = new BrowserOpenHandler();
+
     // ---- wire user input → socket ----
     terminal.onInput((data) => socket?.sendInput(data));
 
@@ -88,6 +92,8 @@ export function TerminalPane({ workspace, sessionId, onStateChange }: TerminalPa
         url: wsUrl,
 
         onOutput(data) {
+          // Process data for browser open markers before writing to terminal
+          browserOpenHandler.process(new Uint8Array(data));
           terminal.write(new Uint8Array(data));
         },
 
@@ -97,6 +103,7 @@ export function TerminalPane({ workspace, sessionId, onStateChange }: TerminalPa
           // to prevent duplicate output on reconnect.
           if (state === "reconnecting") {
             terminal.reset();
+            browserOpenHandler.reset();
           }
           if (error) {
             console.error("[ccccocc] terminal:", error.message);

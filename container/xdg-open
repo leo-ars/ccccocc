@@ -1,0 +1,23 @@
+#!/bin/bash
+# xdg-open replacement for headless containers
+# Outputs a special marker that the client-side JavaScript can detect
+# and use to open the URL in the user's browser
+
+if [ -z "$1" ]; then
+    echo "Usage: xdg-open <URL>" >&2
+    exit 1
+fi
+
+URL="$1"
+
+# Output a marker that the client-side JavaScript will detect
+# The marker format is: [[BROWSER_OPEN:<URL>]]
+echo ""
+echo "[[BROWSER_OPEN:${URL}]]"
+echo ""
+
+# Also output a message for the user (in case detection fails)
+echo "→ Opening browser: ${URL}"
+echo "   (If the browser didn't open automatically, please open this URL manually)"
+
+exit 0

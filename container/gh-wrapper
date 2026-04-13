@@ -1,0 +1,12 @@
+#!/bin/bash
+# gh wrapper that ensures GH_BROWSER is set for browser-based OAuth flows
+# The client-side terminal handler detects device codes and copies them to clipboard
+
+GH_BIN="/usr/bin/gh"
+
+# Set up the browser opener for OAuth flows
+export GH_BROWSER="/usr/local/bin/xdg-open"
+export BROWSER="/usr/local/bin/xdg-open"
+
+# Run the real gh command
+exec $GH_BIN "$@"

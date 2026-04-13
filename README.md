@@ -14,7 +14,7 @@ See also:
 - Multi-tab terminal workspace with refresh persistence and reconnect-to-the-same-session behavior
 - Shared-session detection when the same backend session is open in multiple browser windows
 - Backup and restore endpoints for `/workspace`, with optional durable mounts via Cloudflare storage
-- Preinstalled terminal tooling for agent workflows, including Codex CLI, Claude Code, `vim`, and terminal `emacs`
+- Preinstalled terminal tooling for agent workflows, including Codex CLI, Claude Code, OpenCode CLI, GitHub CLI (`gh`), `vim`, and terminal `emacs`
 - Cloudflare Access auth in production and localhost-only dev mode when Access is unset
 
 ## Architecture
