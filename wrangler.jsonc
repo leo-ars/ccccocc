@@ -10,12 +10,6 @@
 	"assets": {
 		"not_found_handling": "single-page-application",
 	},
-	"routes": [
-		{
-			"pattern": "code.devbin.tools",
-			"custom_domain": true,
-		},
-	],
 	"containers": [
 		{
 			"class_name": "Sandbox",
@@ -24,6 +18,9 @@
 			"max_instances": 5,
 		},
 	],
+	"observability": {
+		"enabled": true,
+		},
 	"durable_objects": {
 		"bindings": [
 			{

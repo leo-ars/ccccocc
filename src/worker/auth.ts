@@ -58,6 +58,7 @@ export function validateHostAccessPolicy(
 
   const hostname = new URL(request.url).hostname.toLowerCase();
   if (isLocalDevHost(hostname)) return null;
+  if (isWorkersDevHost(hostname)) return null;
 
   return "Cloudflare Access must be configured for non-local hosts";
 }
@@ -68,6 +69,10 @@ function isAccessConfigured(env: Pick<Env, "CF_ACCESS_AUD" | "CF_ACCESS_TEAM">):
 
 function isLocalDevHost(hostname: string): boolean {
   return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname === "[::1]";
+}
+
+function isWorkersDevHost(hostname: string): boolean {
+  return hostname.endsWith(".workers.dev");
 }
 
 // ---------------------------------------------------------------------------
